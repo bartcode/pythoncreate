@@ -9,9 +9,7 @@ const RouteWithScene = props => {
         <Route
             {...rest}
             render={matchProps => (
-                <Scene>
-                    <Component {...matchProps} />
-                </Scene>
+                <Scene component={Component} {...matchProps} />
             )}
         />
     );
@@ -20,7 +18,7 @@ const RouteWithScene = props => {
 RouteWithScene.propTypes = {
     component: PropTypes.any.isRequired,
     scene: PropTypes.any.isRequired,
-    path: PropTypes.string
+    path: PropTypes.string,
 };
 
 export default RouteWithScene;

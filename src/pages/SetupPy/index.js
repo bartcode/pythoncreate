@@ -1,7 +1,7 @@
-import React from 'react';
-import Header from '../../components/Header';
+import React from "react";
+import Header from "components/Header";
 
-import './style.scss';
+import "./style.scss";
 
 export default class SetupPy extends React.Component {
   render() {

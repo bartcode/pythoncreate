@@ -1,9 +1,9 @@
 import React from "react";
 import { Switch, Redirect } from "react-router-dom";
 
-import Paperbase from "../scenes/Main"
-import SetupPy from "../pages/SetupPy"
-import Homepage from "../pages/Homepage"
+import Paperbase from "scenes/Main";
+import SetupPy from "pages/SetupPy";
+import Homepage from "pages/Homepage";
 import RouteWithScene from "./RouteWithScene";
 
 export default function Routes() {

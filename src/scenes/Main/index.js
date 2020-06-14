@@ -144,6 +144,19 @@ const styles = {
       flexShrink: 0,
     },
   },
+  paper: {
+    maxWidth: 900,
+    margin: 'auto',
+    overflow: 'hidden',
+  },
+  contentWrapper: {
+    margin: '16px 16px',
+    minHeight: 'auto',
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      minHeight: 'auto',
+    },
+  },
   app: {
     flex: 1,
     display: 'flex',
@@ -186,7 +199,7 @@ function Paperbase(props) {
           </Hidden>
         </nav>
         <div className={classes.app}>
-          <Component classes={classes} />
+          <Component classes={classes} handleDrawerToggle={handleDrawerToggle} />
 
           <footer className={classes.footer}>
             <Copyright />
@@ -199,7 +212,7 @@ function Paperbase(props) {
 
 Paperbase.propTypes = {
   classes: PropTypes.object.isRequired,
-  component: PropTypes.object.isRequired,
+  component: PropTypes.any.isRequired
 };
 
 export default withStyles(styles)(Paperbase);

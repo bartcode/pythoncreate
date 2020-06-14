@@ -5,8 +5,6 @@ import Routes from './routes';
 
 import { createBrowserHistory } from 'history';
 
-import './App.scss';
-
 const browserHistory = createBrowserHistory();
 
 function App() {

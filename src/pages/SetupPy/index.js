@@ -22,6 +22,7 @@ export default class SetupPy extends React.Component {
       code: "",
       copied: false,
       author: "Hank",
+      url: "",
       authorEmail: "hank@pythoncreate.com",
       description: "Description of the project.",
       classifiers: [],
@@ -69,6 +70,9 @@ export default class SetupPy extends React.Component {
     }
     if (this.state.authorEmail) {
       code.push(`    author_email="` + this.state.authorEmail + `",`);
+    }
+    if (this.state.url) {
+      code.push(`    url="` + this.state.url + `",`);
     }
     if (this.state.description) {
       code.push(`    description="` + this.state.description + `",`);
@@ -134,6 +138,10 @@ export default class SetupPy extends React.Component {
     return value.replace(/[^\w\s!@#$%&'*+-/\\=?^_`{|}~]/gi, "");
   }
 
+  filterURL(value) {
+    return value.replace(/[^\w\s!@#$%&'*+-/\\=?^_`{|}~():]/gi, "");
+  }
+
   filterDescription(value) {
     return value.replace("\"", "\\\"");
   }
@@ -181,7 +189,6 @@ export default class SetupPy extends React.Component {
                     }}
                   />
                   <TextField
-                    required
                     id="author"
                     label="Author"
                     defaultValue={this.state.author}
@@ -191,7 +198,15 @@ export default class SetupPy extends React.Component {
                     }}
                   />
                   <TextField
-                    required
+                    id="url"
+                    label="URL"
+                    defaultValue={this.state.url}
+                    variant="outlined"
+                    onChange={e => {
+                      this.setState({ url: this.filterURL(e.target.value) || this.defaultValue }, this.updatePythonCode);
+                    }}
+                  />
+                  <TextField
                     id="author-email"
                     label="E-mail"
                     defaultValue={this.state.authorEmail}
@@ -201,7 +216,6 @@ export default class SetupPy extends React.Component {
                     }}
                   />
                   <TextField
-                    required
                     id="description"
                     label="Description"
                     defaultValue={this.state.description}

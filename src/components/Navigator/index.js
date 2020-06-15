@@ -62,7 +62,7 @@ const styles = (theme) => ({
 });
 
 function Navigator(props) {
-    const { classes, ...other } = props;
+    const { classes, location, ...other } = props;
 
     return (
         <Drawer variant="permanent" {...other}>
@@ -93,13 +93,13 @@ function Navigator(props) {
                                 {id}
                             </ListItemText>
                         </ListItem>
-                        {children.map(({ id: childId, href, icon, active }) => (
+                        {children.map(({ id: childId, href, icon }) => (
                             <ListItem
                                 key={childId}
                                 button
                                 component="a"
                                 href={href}
-                                className={clsx(classes.item, active && classes.itemActiveItem)}
+                                className={clsx(classes.item, location === href && classes.itemActiveItem)}
                             >
                                 <ListItemIcon className={classes.itemIcon}>{icon}</ListItemIcon>
                                 <ListItemText

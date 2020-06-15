@@ -21,8 +21,8 @@ export default class SetupPy extends React.Component {
       intro: null,
       code: "",
       copied: false,
-      author: "author",
-      authorEmail: "author@pythoncreate.com",
+      author: "Hank",
+      authorEmail: "hank@pythoncreate.com",
       description: "Description of the project.",
       classifiers: [],
       version: "0.0.1",
@@ -30,7 +30,8 @@ export default class SetupPy extends React.Component {
       srcFolder: true,
       versionInPackage: true,
       packageData: false,
-      packageName: "hello-world"
+      packageName: "hello-world",
+      entrypoint: false,
     };
   }
 
@@ -89,7 +90,7 @@ export default class SetupPy extends React.Component {
 
     if (this.state.packageData) {
       code.push(`    include_package_data=True,`);
-      code.push(`    package_data={"` + this.state.packageName + `": ["src/` + this.state.packageName + `resources/*"]},`);
+      code.push(`    package_data={"` + this.state.packageName + `": ["src/` + this.state.packageName + `/resources/*"]},`);
     }
 
     if (this.state.requirements) {
@@ -103,7 +104,13 @@ export default class SetupPy extends React.Component {
       );
       code.push(`    ],`);
     }
-    // code.push(`  entry_points={"console_scripts": ["{name}={name}.cli.__main__:main"]},`);
+
+    if (this.state.entrypoint) {
+      code.push(`    entry_points={`);
+      code.push(`      "console_scripts": [`);
+      code.push(`          "` + this.state.packageName + `"="` + this.state.packageName + `.__main__.main",`)
+      code.push(`    ]},`);
+    }
     if (this.state.classifiers.length > 0) {
       code.push(`    classifiers=[`);
       this.state.classifiers.forEach(
@@ -114,6 +121,22 @@ export default class SetupPy extends React.Component {
     code.push(`)`);
 
     return code.join("\n");
+  }
+
+  filterPackagename(value) {
+    return value.replace(/[^\w\s-]/gi, "");
+  }
+
+  filterAuthorname(value) {
+    return value.replace("\"", "\\\"");
+  }
+
+  filterEmailAddress(value) {
+    return value.replace(/[^\w\s!@#$%&'*+-/\\=?^_`{|}~]/gi, "");
+  }
+
+  filterDescription(value) {
+    return value.replace("\"", "\\\"");
   }
 
   updatePythonCode() {
@@ -129,7 +152,7 @@ export default class SetupPy extends React.Component {
         defaultValue={this.state.version}
         variant="outlined"
         onChange={e => {
-          this.setState({ author: e.target.value.replace(/"/g, "\\\"") || this.defaultValue }, this.updatePythonCode);
+          this.setState({ author: e.target.value || this.defaultValue }, this.updatePythonCode);
         }}
       />
     );
@@ -155,7 +178,7 @@ export default class SetupPy extends React.Component {
                     defaultValue={this.state.packageName}
                     variant="outlined"
                     onChange={e => {
-                      this.setState({ packageName: e.target.value.replace(/"/g, "\\\"") || this.defaultValue }, this.updatePythonCode);
+                      this.setState({ packageName: this.filterPackagename(e.target.value) || this.defaultValue }, this.updatePythonCode);
                     }}
                   />
                   <TextField
@@ -165,7 +188,7 @@ export default class SetupPy extends React.Component {
                     defaultValue={this.state.author}
                     variant="outlined"
                     onChange={e => {
-                      this.setState({ author: e.target.value.replace(/"/g, "\\\"") || this.defaultValue }, this.updatePythonCode);
+                      this.setState({ author: this.filterAuthorname(e.target.value) || this.defaultValue }, this.updatePythonCode);
                     }}
                   />
                   <TextField
@@ -175,7 +198,7 @@ export default class SetupPy extends React.Component {
                     defaultValue={this.state.authorEmail}
                     variant="outlined"
                     onChange={e => {
-                      this.setState({ authorEmail: e.target.value.replace(/"/g, "\\\"") || this.defaultValue }, this.updatePythonCode);
+                      this.setState({ authorEmail: this.filterEmailAddress(e.target.value) || this.defaultValue }, this.updatePythonCode);
                     }}
                   />
                   <TextField
@@ -187,7 +210,7 @@ export default class SetupPy extends React.Component {
                     rowsMax={4}
                     variant="outlined"
                     onChange={e => {
-                      this.setState({ description: e.target.value.replace(/"/g, "\\\"") || this.defaultValue }, this.updatePythonCode);
+                      this.setState({ description: this.filterDescription(e.target.value) || this.defaultValue }, this.updatePythonCode);
                     }}
                   />
                   <FormControlLabel
@@ -227,6 +250,18 @@ export default class SetupPy extends React.Component {
                     label={<div>Include <strong>package data</strong>.</div>}
                     labelPlacement="end"
                   />
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        checked={this.state.entrypoint}
+                        onChange={() => {
+                          this.setState({ entrypoint: !this.state.entrypoint }, this.updatePythonCode);
+                        }}
+                      />
+                    }
+                    label={<div>Add <strong>entrypoint</strong>.</div>}
+                    labelPlacement="end"
+                  />
                   <TextField
                     id="requirements"
                     label="Requirements"
@@ -234,7 +269,7 @@ export default class SetupPy extends React.Component {
                     defaultValue={this.state.requirements}
                     variant="outlined"
                     onChange={e => {
-                      this.setState({ requirements: e.target.value.replace(/"/g, "\\\"") || this.defaultValue }, this.updatePythonCode);
+                      this.setState({ requirements: e.target.value || this.defaultValue }, this.updatePythonCode);
                     }}
                   />
                   <Autocomplete
@@ -254,7 +289,7 @@ export default class SetupPy extends React.Component {
                 </FormGroup>
               </Grid>
               <Grid item xs={12}>
-                <SyntaxHighlighter language="python" style={solarizedDark}>{this.state.code}</SyntaxHighlighter>
+                <SyntaxHighlighter language="python" style={solarizedDark} className={this.props.classes.syntax}>{this.state.code}</SyntaxHighlighter>
                 <CopyToClipboard text={this.state.code}
                   onCopy={() => this.setState({ copied: true })}>
                   <Button variant="contained" color="primary">{(this.state.copied) ? "Copied!" : "Copy"}</Button>

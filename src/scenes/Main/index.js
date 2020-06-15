@@ -157,6 +157,9 @@ const styles = {
       minHeight: 'auto',
     },
   },
+  syntax: {
+    fontSize: '1.3em',
+  },
   app: {
     flex: 1,
     display: 'flex',
@@ -190,12 +193,16 @@ function Paperbase(props) {
             <Navigator
               PaperProps={{ style: { width: drawerWidth } }}
               variant="temporary"
+              location={props.location.pathname}
               open={mobileOpen}
               onClose={handleDrawerToggle}
             />
           </Hidden>
           <Hidden xsDown implementation="css">
-            <Navigator PaperProps={{ style: { width: drawerWidth } }} />
+            <Navigator
+              PaperProps={{ style: { width: drawerWidth } }}
+              location={props.location.pathname}
+            />
           </Hidden>
         </nav>
         <div className={classes.app}>

@@ -46,7 +46,7 @@ export default class SetupPy extends React.Component {
   getPythonCode() {
     var code = [
       `"""Install packages as defined in this file into the Python environment."""`,
-      `from setuptools import setup, find_namespace_packages`,
+      `from setuptools import setup, ` + (this.state.srcFolder ? "find_namespace_packages" : "find_packages"),
     ];
 
     code.push("");
@@ -82,10 +82,9 @@ export default class SetupPy extends React.Component {
 
     if (this.state.srcFolder) {
       code.push(`    package_dir={"": "src"},`);
-      code.push(`    packages=find_namespace_packages(where="src"),`);
+      code.push(`    packages=find_namespace_packages(where="src", exclude=["tests"]),`);
     } else {
-      code.push(`    package_dir={"": ""},`);
-      code.push(`    packages=find_namespace_packages(where="."),`);
+      code.push(`    packages=find_packages(where=".", exclude=["tests"]),`);
     }
 
     if (this.state.packageData) {

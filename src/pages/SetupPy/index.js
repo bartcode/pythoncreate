@@ -26,7 +26,7 @@ export default class SetupPy extends React.Component {
       url: "",
       authorEmail: "hank@pythoncreate.com",
       description: "Description of the project.",
-      classifiers: [],
+      classifiers: [pythonClassifiers[0], pythonClassifiers[400], pythonClassifiers[724]],
       version: "0.0.1",
       requirements: "setuptools>=45.0",
       srcFolder: true,
@@ -290,9 +290,9 @@ export default class SetupPy extends React.Component {
                     />
                     <Autocomplete
                       multiple
-                      id="classifiers-outlined"
+                      id="classifiers"
                       options={pythonClassifiers}
-                      defaultValue={[pythonClassifiers[0], pythonClassifiers[400], pythonClassifiers[724]]}
+                      defaultValue={this.state.classifiers}
                       filterSelectedOptions
                       renderInput={(params) => (
                         <TextField
@@ -301,6 +301,10 @@ export default class SetupPy extends React.Component {
                           label="Select classifiers"
                         />
                       )}
+                      onChange={(_, v) => {
+                        console.log(v);
+                        this.setState({ classifiers: v || this.defaultValue }, this.updatePythonCode);
+                      }}
                     />
                   </FormGroup>
                 </Grid>

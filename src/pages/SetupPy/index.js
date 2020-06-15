@@ -159,7 +159,7 @@ export default class SetupPy extends React.Component {
         defaultValue={this.state.version}
         variant="outlined"
         onChange={e => {
-          this.setState({ author: e.target.value || this.defaultValue }, this.updatePythonCode);
+          this.setState({ version: e.target.value || this.defaultValue }, this.updatePythonCode);
         }}
       />
     );

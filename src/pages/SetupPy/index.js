@@ -10,6 +10,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 
 import markdownSourceIntro from "pages/SetupPy/SetupPy-intro.md"
 import pythonClassifiers from "pages/SetupPy/classifiers.json"
+import Header from "components/Header";
 
 
 
@@ -165,153 +166,156 @@ export default class SetupPy extends React.Component {
     );
 
     return (
-      <main className={this.props.classes.main}>
-        <Paper className={this.props.classes.paper}>
-          <div className={this.props.classes.contentWrapper}>
-            <ReactMarkdown source={this.state.intro} />
+      <React.Fragment>
+        <Header onDrawerToggle={this.props.handleDrawerToggle} />
+        <main className={this.props.classes.main}>
+          <Paper className={this.props.classes.paper}>
+            <div className={this.props.classes.contentWrapper}>
+              <ReactMarkdown source={this.state.intro} />
 
-            <Grid
-              container
-              direction="row"
-              justify="flex-start"
-              alignItems="flex-start"
-            >
-              <Grid item xs={12}>
-                <FormGroup>
-                  <TextField
-                    required
-                    id="name"
-                    label="Package name"
-                    defaultValue={this.state.packageName}
-                    variant="outlined"
-                    onChange={e => {
-                      this.setState({ packageName: this.filterPackagename(e.target.value) || this.defaultValue }, this.updatePythonCode);
-                    }}
-                  />
-                  <TextField
-                    id="author"
-                    label="Author"
-                    defaultValue={this.state.author}
-                    variant="outlined"
-                    onChange={e => {
-                      this.setState({ author: this.filterAuthorname(e.target.value) || this.defaultValue }, this.updatePythonCode);
-                    }}
-                  />
-                  <TextField
-                    id="url"
-                    label="URL"
-                    defaultValue={this.state.url}
-                    variant="outlined"
-                    onChange={e => {
-                      this.setState({ url: this.filterURL(e.target.value) || this.defaultValue }, this.updatePythonCode);
-                    }}
-                  />
-                  <TextField
-                    id="author-email"
-                    label="E-mail"
-                    defaultValue={this.state.authorEmail}
-                    variant="outlined"
-                    onChange={e => {
-                      this.setState({ authorEmail: this.filterEmailAddress(e.target.value) || this.defaultValue }, this.updatePythonCode);
-                    }}
-                  />
-                  <TextField
-                    id="description"
-                    label="Description"
-                    defaultValue={this.state.description}
-                    multiline
-                    rowsMax={4}
-                    variant="outlined"
-                    onChange={e => {
-                      this.setState({ description: this.filterDescription(e.target.value) || this.defaultValue }, this.updatePythonCode);
-                    }}
-                  />
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={this.state.srcFolder}
-                        onChange={() => {
-                          this.setState({ srcFolder: !this.state.srcFolder }, this.updatePythonCode);
-                        }}
-                      />
-                    }
-                    label={<div>Package is placed in <code>src/</code>.</div>}
-                    labelPlacement="end"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={this.state.versionInPackage}
-                        onChange={() => {
-                          this.setState({ versionInPackage: !this.state.versionInPackage }, this.updatePythonCode);
-                        }}
-                      />
-                    }
-                    label={<div>Read <strong>version</strong> from package.</div>}
-                    labelPlacement="end"
-                  />
-                  {versionField}
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={this.state.packageData}
-                        onChange={() => {
-                          this.setState({ packageData: !this.state.packageData }, this.updatePythonCode);
-                        }}
-                      />
-                    }
-                    label={<div>Include <strong>package data</strong>.</div>}
-                    labelPlacement="end"
-                  />
-                  <FormControlLabel
-                    control={
-                      <Switch
-                        checked={this.state.entrypoint}
-                        onChange={() => {
-                          this.setState({ entrypoint: !this.state.entrypoint }, this.updatePythonCode);
-                        }}
-                      />
-                    }
-                    label={<div>Add <strong>entrypoint</strong>.</div>}
-                    labelPlacement="end"
-                  />
-                  <TextField
-                    id="requirements"
-                    label="Requirements"
-                    multiline
-                    defaultValue={this.state.requirements}
-                    variant="outlined"
-                    onChange={e => {
-                      this.setState({ requirements: e.target.value || this.defaultValue }, this.updatePythonCode);
-                    }}
-                  />
-                  <Autocomplete
-                    multiple
-                    id="classifiers-outlined"
-                    options={pythonClassifiers}
-                    defaultValue={[pythonClassifiers[0], pythonClassifiers[400], pythonClassifiers[724]]}
-                    filterSelectedOptions
-                    renderInput={(params) => (
-                      <TextField
-                        {...params}
-                        variant="outlined"
-                        label="Select classifiers"
-                      />
-                    )}
-                  />
-                </FormGroup>
+              <Grid
+                container
+                direction="row"
+                justify="flex-start"
+                alignItems="flex-start"
+              >
+                <Grid item xs={12}>
+                  <FormGroup>
+                    <TextField
+                      required
+                      id="name"
+                      label="Package name"
+                      defaultValue={this.state.packageName}
+                      variant="outlined"
+                      onChange={e => {
+                        this.setState({ packageName: this.filterPackagename(e.target.value) || this.defaultValue }, this.updatePythonCode);
+                      }}
+                    />
+                    <TextField
+                      id="author"
+                      label="Author"
+                      defaultValue={this.state.author}
+                      variant="outlined"
+                      onChange={e => {
+                        this.setState({ author: this.filterAuthorname(e.target.value) || this.defaultValue }, this.updatePythonCode);
+                      }}
+                    />
+                    <TextField
+                      id="url"
+                      label="URL"
+                      defaultValue={this.state.url}
+                      variant="outlined"
+                      onChange={e => {
+                        this.setState({ url: this.filterURL(e.target.value) || this.defaultValue }, this.updatePythonCode);
+                      }}
+                    />
+                    <TextField
+                      id="author-email"
+                      label="E-mail"
+                      defaultValue={this.state.authorEmail}
+                      variant="outlined"
+                      onChange={e => {
+                        this.setState({ authorEmail: this.filterEmailAddress(e.target.value) || this.defaultValue }, this.updatePythonCode);
+                      }}
+                    />
+                    <TextField
+                      id="description"
+                      label="Description"
+                      defaultValue={this.state.description}
+                      multiline
+                      rowsMax={4}
+                      variant="outlined"
+                      onChange={e => {
+                        this.setState({ description: this.filterDescription(e.target.value) || this.defaultValue }, this.updatePythonCode);
+                      }}
+                    />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={this.state.srcFolder}
+                          onChange={() => {
+                            this.setState({ srcFolder: !this.state.srcFolder }, this.updatePythonCode);
+                          }}
+                        />
+                      }
+                      label={<div>Package is placed in <code>src/</code>.</div>}
+                      labelPlacement="end"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={this.state.versionInPackage}
+                          onChange={() => {
+                            this.setState({ versionInPackage: !this.state.versionInPackage }, this.updatePythonCode);
+                          }}
+                        />
+                      }
+                      label={<div>Read <strong>version</strong> from package.</div>}
+                      labelPlacement="end"
+                    />
+                    {versionField}
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={this.state.packageData}
+                          onChange={() => {
+                            this.setState({ packageData: !this.state.packageData }, this.updatePythonCode);
+                          }}
+                        />
+                      }
+                      label={<div>Include <strong>package data</strong>.</div>}
+                      labelPlacement="end"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Switch
+                          checked={this.state.entrypoint}
+                          onChange={() => {
+                            this.setState({ entrypoint: !this.state.entrypoint }, this.updatePythonCode);
+                          }}
+                        />
+                      }
+                      label={<div>Add <strong>entrypoint</strong>.</div>}
+                      labelPlacement="end"
+                    />
+                    <TextField
+                      id="requirements"
+                      label="Requirements"
+                      multiline
+                      defaultValue={this.state.requirements}
+                      variant="outlined"
+                      onChange={e => {
+                        this.setState({ requirements: e.target.value || this.defaultValue }, this.updatePythonCode);
+                      }}
+                    />
+                    <Autocomplete
+                      multiple
+                      id="classifiers-outlined"
+                      options={pythonClassifiers}
+                      defaultValue={[pythonClassifiers[0], pythonClassifiers[400], pythonClassifiers[724]]}
+                      filterSelectedOptions
+                      renderInput={(params) => (
+                        <TextField
+                          {...params}
+                          variant="outlined"
+                          label="Select classifiers"
+                        />
+                      )}
+                    />
+                  </FormGroup>
+                </Grid>
+                <Grid item xs={12}>
+                  <SyntaxHighlighter language="python" style={solarizedDark} className={this.props.classes.syntax}>{this.state.code}</SyntaxHighlighter>
+                  <CopyToClipboard text={this.state.code}
+                    onCopy={() => this.setState({ copied: true })}>
+                    <Button variant="contained" color="primary">{(this.state.copied) ? "Copied!" : "Copy"}</Button>
+                  </CopyToClipboard>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <SyntaxHighlighter language="python" style={solarizedDark} className={this.props.classes.syntax}>{this.state.code}</SyntaxHighlighter>
-                <CopyToClipboard text={this.state.code}
-                  onCopy={() => this.setState({ copied: true })}>
-                  <Button variant="contained" color="primary">{(this.state.copied) ? "Copied!" : "Copy"}</Button>
-                </CopyToClipboard>
-              </Grid>
-            </Grid>
-          </div>
-        </Paper>
-      </main>
+            </div>
+          </Paper>
+        </main>
+      </React.Fragment>
     );
   }
 }

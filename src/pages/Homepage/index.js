@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 
 import { Paper } from "@material-ui/core";
 import markdownSource from "pages/Homepage/Homepage.md"
+import Header from "components/Header";
 
 export default class Homepage extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class Homepage extends React.Component {
     this.state = { markdown: null }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     fetch(markdownSource).then((response) => response.text()).then((text) => {
       this.setState({ markdown: text })
     })
@@ -20,6 +21,7 @@ export default class Homepage extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <Header onDrawerToggle={this.props.handleDrawerToggle} />
         <main className={this.props.classes.main}>
           <Paper className={this.props.classes.paper}>
             <div className={this.props.classes.contentWrapper}>

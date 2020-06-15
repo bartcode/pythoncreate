@@ -118,7 +118,7 @@ export default class SetupPy extends React.Component {
     if (this.state.classifiers.length > 0) {
       code.push(`    classifiers=[`);
       this.state.classifiers.forEach(
-        c => code.push(`      "` + c + `",`)
+        c => code.push(`        "` + c + `",`)
       );
       code.push(`    ],`);
     }

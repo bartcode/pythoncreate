@@ -11,6 +11,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import markdownSourceIntro from "pages/SetupPy/SetupPy-intro.md"
 import pythonClassifiers from "pages/SetupPy/classifiers.json"
 import Header from "components/Header";
+import { Helmet } from "react-helmet";
 
 
 
@@ -80,7 +81,7 @@ export default class SetupPy extends React.Component {
     }
 
     if (this.state.versionInPackage) {
-      code.push(`    version=VERSION.get("__version__", None),`);
+      code.push(`    version=VERSION.get("__version__", "0.0.0"),`);
     } else if (this.state.version) {
       code.push(`    version="` + this.state.version + `",`);
     }
@@ -168,6 +169,11 @@ export default class SetupPy extends React.Component {
     return (
       <React.Fragment>
         <Header onDrawerToggle={this.props.handleDrawerToggle} />
+        <Helmet>
+          <title>setup.py generator for Python projects | Python Create</title>
+          <meta name="description" content="Use the setup.py generator to get perfect the way you're installing your Python package." />
+          <meta name="robots" content="index, follow" />
+        </Helmet>
         <main className={this.props.classes.main}>
           <Paper className={this.props.classes.paper}>
             <div className={this.props.classes.contentWrapper}>

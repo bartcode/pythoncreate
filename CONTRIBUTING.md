@@ -2,10 +2,10 @@
 
 This document describes how the development of Python Create is organised.
 
-
-## Setting up the project
+## Setting up the project for development
 
 ```bash
+npm install -g firebase-tools
 npm install
 npm run start  # Develop mode
 ```
@@ -17,7 +17,8 @@ An example would be `feature/PC16_seo_improvement`.
 
 ## Going to production
 
-Verify that the website still works after running the commands below.
+Verify that the website still works after running the commands below. This shows that the
+built package also works on the firebase emulator.
 
 ```bash
 npm run build  # Build source files

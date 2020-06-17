@@ -1,7 +1,7 @@
 
 # Python Create
 
-With [Python Create](https://pythoncreate.com/), we're aiming to create on online platform with generators (and perhaps some tutorials) for
+With [Python Create](https://pythoncreate.com/), we're aiming to create an online platform with generators (and perhaps some tutorials) for
 developing proper Python code. Feature suggestions can be submitted to the [Issues](https://github.com/bartcode/pythoncreate/issues)
 page of this repository.
 

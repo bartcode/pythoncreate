@@ -33,7 +33,7 @@ export default class SetupPy extends React.Component {
       srcFolder: true,
       versionInPackage: true,
       packageData: false,
-      packageName: "hello-world",
+      packageName: "hello_world",
       entrypoint: false,
     };
   }
@@ -129,7 +129,7 @@ export default class SetupPy extends React.Component {
   }
 
   filterPackagename(value) {
-    return value.replace(/[^\w\s-]/gi, "");
+    return value.replace(/[^\w\s-]/gi, "").replace("-", "_");
   }
 
   filterAuthorname(value) {

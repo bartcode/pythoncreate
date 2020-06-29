@@ -16,6 +16,8 @@ jobs:
         run: npm audit fix
       - name: Build
         run: npm run build
+      - name: Create sitemap
+        run: npm run sitemap
       - name: Archive production artifact
         uses: actions/upload-artifact@master
         with:

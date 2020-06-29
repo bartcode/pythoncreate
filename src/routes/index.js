@@ -6,11 +6,27 @@ import SetupPy from "pages/SetupPy";
 import Homepage from "pages/Homepage";
 import RouteWithScene from "./RouteWithScene";
 
-export default function Routes() {
+export const routes = [
+  {
+    path: "/setup-py-generator",
+    scene: Paperbase,
+    component: SetupPy
+  },
+  {
+    path: "/",
+    scene: Paperbase,
+    component: Homepage
+  }
+];
+
+export default function RoutesSwitch() {
   return (
     <Switch>
-      <RouteWithScene path="/setup-py-generator" scene={Paperbase} component={SetupPy} />
-      <RouteWithScene path="/" scene={Paperbase} component={Homepage} />
+      {
+        routes.map((route, index) => (
+          <RouteWithScene path={route.path} scene={route.scene} component={route.component} key={index} />
+        ))
+      }
       <Redirect to="/" />
     </Switch>
   );

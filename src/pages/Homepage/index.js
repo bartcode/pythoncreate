@@ -25,7 +25,7 @@ export default class Homepage extends React.Component {
         <Header onDrawerToggle={this.props.handleDrawerToggle} />
         <Helmet>
           <title>Homepage | Python Create</title>
-          <meta name="description" content="Python Create offers generators and instructions on using Python optimally. Get help writing your code by the tools we offer." />
+          <meta name="description" content="Python Create offers generators and instructions on using Python optimally. Get help writing your code with the tools we offer." />
           <meta name="robots" content="index, follow" />
         </Helmet>
         <main className={this.props.classes.main}>

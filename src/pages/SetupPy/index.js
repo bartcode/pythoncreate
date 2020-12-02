@@ -113,8 +113,9 @@ export default class SetupPy extends React.Component {
     if (this.state.entrypoint) {
       code.push(`    entry_points={`);
       code.push(`        "console_scripts": [`);
-      code.push(`            "` + this.state.packageName + `=` + this.state.packageName + `.__main__.main",`)
-      code.push(`    ]},`);
+      code.push(`            "` + this.state.packageName + `=` + this.state.packageName + `.__main__:main",`)
+      code.push(`        ]`);
+      code.push(`    },`);
     }
     if (this.state.classifiers.length > 0) {
       code.push(`    classifiers=[`);
